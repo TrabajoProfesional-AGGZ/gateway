@@ -1,3 +1,4 @@
+# sociounido-gateway/docker-compose.yml
 version: '3.8'
 
 services:
@@ -13,7 +14,12 @@ services:
       - ./krakend.json:/etc/krakend/krakend.json
     ports:
       - "${API_PORT}:8080"
-    command: ["run", "-d", "-c", "/etc/krakend/krakend.json"]
+    networks:
+      - sociounido_net
+
+  ms-core:
+    build: ../microservicio-club
+    container_name: sociounido_ms_core_integ
     networks:
       - sociounido_net
 

@@ -25,7 +25,7 @@
         {
           "url_pattern": "/health",
           "method": "GET",
-          "host": ["http://ms-core:8000"]
+          "host": ["{{ env `MS_CLUB_URL` }}"]
         }
       ]
     },
@@ -46,7 +46,49 @@
         {
           "url_pattern": "/socios/{dni}",
           "method": "GET",
-          "host": ["http://ms-core:8000"]
+          "host": ["{{ env `MS_CLUB_URL` }}"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/v1/socios",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/socios",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": ["{{ env `MS_CLUB_URL` }}"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/docs/club",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/docs",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "GET",
+          "host": ["{{ env `MS_CLUB_URL` }}"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/openapi.json",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/openapi.json",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "GET",
+          "host": ["{{ env `MS_CLUB_URL` }}"]
         }
       ]
     }
