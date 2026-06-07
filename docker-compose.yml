@@ -10,6 +10,7 @@ services:
     environment:
       - FC_ENABLE=1
       - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+      - MS_CLUB_URL=${MS_CLUB_URL}
     volumes:
       - ./krakend.json:/etc/krakend/krakend.json
     ports:
