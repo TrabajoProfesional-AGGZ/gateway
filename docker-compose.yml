@@ -11,6 +11,8 @@ services:
       - FC_ENABLE=1
       - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
       - MS_CLUB_URL=${MS_CLUB_URL}
+      - INTERNAL_SECRET_TOKEN=${INTERNAL_SECRET_TOKEN}
+      - API_PORT=${API_PORT}
     volumes:
       - ./krakend.json:/etc/krakend/krakend.json
     ports:

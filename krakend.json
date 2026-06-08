@@ -28,20 +28,22 @@
           "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
           "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
           "disable_jwk_security": true
-        },
-        "proxy": {
-          "modify": {
-            "headers": {
-              "X-Internal-Secret": ["{{ env `INTERNAL_SECRET_TOKEN` }}"]
-            }
-          }
         }
       },      
       "backend": [
         {
-          "url_pattern": "/health",
+          "url_pattern": "/api/v1/health",
           "method": "GET",
-          "host": ["{{ env `MS_CLUB_URL` }}"]
+          "host": ["{{ env `MS_CLUB_URL` }}"],
+          "extra_config": {
+            "modifier/martian": {
+              "header.Modifier": {
+                "scope": ["request"],
+                "name": "X-Internal-Secret",
+                "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+              }
+            }
+          }
         }
       ]
     },
@@ -56,20 +58,22 @@
           "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
           "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
           "disable_jwk_security": true
-        },
-        "proxy": {
-          "modify": {
-            "headers": {
-              "X-Internal-Secret": ["{{ env `INTERNAL_SECRET_TOKEN` }}"]
-            }
-          }
         }
       },
       "backend": [
         {
           "url_pattern": "/socios/{dni}",
           "method": "GET",
-          "host": ["{{ env `MS_CLUB_URL` }}"]
+          "host": ["{{ env `MS_CLUB_URL` }}"],
+          "extra_config": {
+            "modifier/martian": {
+              "header.Modifier": {
+                "scope": ["request"],
+                "name": "X-Internal-Secret",
+                "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+              }
+            }
+          }
         }
       ]
     },
@@ -84,13 +88,6 @@
           "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
           "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
           "disable_jwk_security": true
-        },
-        "proxy": {
-          "modify": {
-            "headers": {
-              "X-Internal-Secret": ["{{ env `INTERNAL_SECRET_TOKEN` }}"]
-            }
-          }
         }
       },
       "backend": [
@@ -99,12 +96,21 @@
           "encoding": "json",
           "sd": "static",
           "method": "GET",
-          "host": ["{{ env `MS_CLUB_URL` }}"]
+          "host": ["{{ env `MS_CLUB_URL` }}"],
+          "extra_config": {
+            "modifier/martian": {
+              "header.Modifier": {
+                "scope": ["request"],
+                "name": "X-Internal-Secret",
+                "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+              }
+            }
+          }
         }
       ]
     },
     {
-      "endpoint": "/api/docs/club",
+      "endpoint": "/api/v1/docs/club",
       "method": "GET",
       "output_encoding": "no-op",
       "backend": [
@@ -118,12 +124,12 @@
       ]
     },
     {
-      "endpoint": "/openapi.json",
+      "endpoint": "/api/v1/openapi.json",
       "method": "GET",
       "output_encoding": "no-op",
       "backend": [
         {
-          "url_pattern": "/openapi.json",
+          "url_pattern": "/api/v1/openapi.json",
           "encoding": "no-op",
           "sd": "static",
           "method": "GET",
