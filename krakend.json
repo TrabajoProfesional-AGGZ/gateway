@@ -21,6 +21,22 @@
       "endpoint": "/api/v1/health",
       "method": "GET",
       "output_encoding": "json",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+          "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+          "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+          "disable_jwk_security": true
+        },
+        "proxy": {
+          "modify": {
+            "headers": {
+              "X-Internal-Secret": ["{{ env `INTERNAL_SECRET_TOKEN` }}"]
+            }
+          }
+        }
+      },      
       "backend": [
         {
           "url_pattern": "/health",
@@ -40,6 +56,13 @@
           "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
           "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
           "disable_jwk_security": true
+        },
+        "proxy": {
+          "modify": {
+            "headers": {
+              "X-Internal-Secret": ["{{ env `INTERNAL_SECRET_TOKEN` }}"]
+            }
+          }
         }
       },
       "backend": [
@@ -54,6 +77,22 @@
       "endpoint": "/api/v1/socios",
       "method": "GET",
       "output_encoding": "json",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+          "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+          "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+          "disable_jwk_security": true
+        },
+        "proxy": {
+          "modify": {
+            "headers": {
+              "X-Internal-Secret": ["{{ env `INTERNAL_SECRET_TOKEN` }}"]
+            }
+          }
+        }
+      },
       "backend": [
         {
           "url_pattern": "/socios",
