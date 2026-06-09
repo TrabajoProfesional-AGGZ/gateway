@@ -23,6 +23,8 @@ services:
   ms-core:
     build: ../microservicio-club
     container_name: sociounido_ms_core_integ
+    env_file:
+      - ../microservicio-club/.env
     networks:
       - sociounido_net
 
