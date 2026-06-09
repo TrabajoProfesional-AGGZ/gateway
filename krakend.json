@@ -20,7 +20,7 @@
     {
       "endpoint": "/api/v1/health",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -47,10 +47,12 @@
         }
       ]
     },
+
     {
-      "endpoint": "/api/v1/socios/{dni}",
+      "endpoint": "/api/v1/socios",
       "method": "GET",
-      "output_encoding": "json",
+      "input_query_strings": ["pagina", "limite"],
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -62,7 +64,39 @@
       },
       "backend": [
         {
-          "url_pattern": "/socios/{dni}",
+          "url_pattern": "/api/v1/socios",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "GET",
+          "host": ["{{ env `MS_CLUB_URL` }}"],
+          "extra_config": {
+            "modifier/martian": {
+              "header.Modifier": {
+                "scope": ["request"],
+                "name": "X-Internal-Secret",
+                "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/v1/socios/{nro_socio}",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+          "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+          "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/api/v1/socios/{nro_socio}",
           "method": "GET",
           "host": ["{{ env `MS_CLUB_URL` }}"],
           "extra_config": {
@@ -79,8 +113,8 @@
     },
     {
       "endpoint": "/api/v1/socios",
-      "method": "GET",
-      "output_encoding": "json",
+      "method": "POST",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -92,10 +126,10 @@
       },
       "backend": [
         {
-          "url_pattern": "/socios",
-          "encoding": "json",
+          "url_pattern": "/api/v1/socios",
+          "encoding": "no-op",
           "sd": "static",
-          "method": "GET",
+          "method": "POST",
           "host": ["{{ env `MS_CLUB_URL` }}"],
           "extra_config": {
             "modifier/martian": {
@@ -109,6 +143,71 @@
         }
       ]
     },
+    {
+      "endpoint": "/api/v1/socios/{nro_socio}",
+      "method": "PATCH",
+      "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+          "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+          "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/api/v1/socios/{nro_socio}",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "PATCH",
+          "host": ["{{ env `MS_CLUB_URL` }}"],
+          "extra_config": {
+            "modifier/martian": {
+              "header.Modifier": {
+                "scope": ["request"],
+                "name": "X-Internal-Secret",
+                "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+              }
+            }
+          }
+        }
+      ]
+    },
+{
+      "endpoint": "/api/v1/socios/{nro_socio}",
+      "method": "DELETE",
+      "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+          "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+          "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/api/v1/socios/{nro_socio}",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "DELETE",
+          "host": ["{{ env `MS_CLUB_URL` }}"],
+          "extra_config": {
+            "modifier/martian": {
+              "header.Modifier": {
+                "scope": ["request"],
+                "name": "X-Internal-Secret",
+                "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+              }
+            }
+          }
+        }
+      ]
+    },
+
     {
       "endpoint": "/api/v1/docs/club",
       "method": "GET",
@@ -124,12 +223,12 @@
       ]
     },
     {
-      "endpoint": "/api/v1/openapi.json",
+      "endpoint": "/openapi.json",
       "method": "GET",
       "output_encoding": "no-op",
       "backend": [
         {
-          "url_pattern": "/api/v1/openapi.json",
+          "url_pattern": "/openapi.json",
           "encoding": "no-op",
           "sd": "static",
           "method": "GET",
