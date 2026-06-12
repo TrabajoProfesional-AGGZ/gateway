@@ -1,0 +1,47 @@
+name: KrakenD Gateway - CI/CD
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main", "development"]
+
+concurrency:
+  group: gateway-pipeline-lock-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # --- ETAPA 1: CI (Integración Continua - Validación estricta) ---
+  validate-krakend:
+    name: Validar Configuración de KrakenD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Validar Sintaxis (krakend check)
+        uses: addnab/docker-run-action@v3
+        with:
+          image: devopsfaith/krakend:latest
+          options: -v ${{ github.workspace }}:/etc/krakend
+          run: |
+            export FC_ENABLE=1
+            export MS_CLUB_URL="http://localhost:8000"
+            export FIREBASE_PROJECT_ID="falso"
+            export API_PORT="8080"
+            export FRONTEND_URL="https://frontfalso.com"
+            export MS_AUTH_URL=http://localhost:9000
+            export INTERNAL_SECRET_TOKEN="supersecreto"
+            krakend check --lint -t -d -c /etc/krakend/krakend.json
+
+  # --- ETAPA 2: CD (Despliegue Continuo) ---
+  deploy-to-render:
+    name: Desplegar Gateway
+    needs: validate-krakend
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Disparar Webhook de Despliegue
+        run: |
+          curl -f "${{ secrets.RENDER_GATEWAY_WEBHOOK }}"
