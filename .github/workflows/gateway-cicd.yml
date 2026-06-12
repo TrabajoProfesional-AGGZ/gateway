@@ -25,6 +25,12 @@ jobs:
           image: devopsfaith/krakend:latest
           options: -v ${{ github.workspace }}:/etc/krakend
           run: |
+            export MS_CLUB_URL="http://localhost:8000"
+            export FIREBASE_PROJECT_ID="falso"
+            export API_PORT="8080"
+            export FRONTEND_URL="https://frontfalso.com"
+            export MS_AUTH_URL=http://localhost:9000
+            export INTERNAL_SECRET_TOKEN="supersecreto"
             krakend check -d -c /etc/krakend/krakend.json
 
   # --- ETAPA 2: CD (Despliegue Continuo) ---
