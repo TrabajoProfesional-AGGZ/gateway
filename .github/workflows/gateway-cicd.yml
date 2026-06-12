@@ -25,9 +25,7 @@ jobs:
           image: devopsfaith/krakend:latest
           options: -v ${{ github.workspace }}:/etc/krakend
           run: |
-            FC_ENABLE=1 \
-            FC_PARTIALS=/etc/krakend/partials \
-            krakend check -t -d -c /etc/krakend/krakend.tmpl
+            krakend check -d -c /etc/krakend/krakend.json
 
   # --- ETAPA 2: CD (Despliegue Continuo) ---
   deploy-to-render:
