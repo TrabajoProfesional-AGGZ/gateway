@@ -2,6 +2,10 @@
 
 Gateway de los microservicios de "SocioUnido".
 
+📖 **[Ver la documentación online](https://trabajoprofesional-aggz.github.io/gateway/)**
+
+Desarrollado con [Just the Docs](https://just-the-docs.com/).
+
 ## URL
 El gateway se encuentra desplegado en la siguiente URL: [https://sociounido-gateway.onrender.com](https://sociounido-gateway.onrender.com). Puedes acceder a esta URL para interactuar con los microservicios a través del gateway.
 
