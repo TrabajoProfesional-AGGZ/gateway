@@ -763,7 +763,6 @@
           "url_pattern": "/api/v1/instalaciones",
           "method": "POST",
           "encoding": "no-op",
-          "timeout":"3000ms",
           "host": ["{{ env `MS_CLUB_URL` }}"],
           "extra_config": {
             "modifier/martian": {
