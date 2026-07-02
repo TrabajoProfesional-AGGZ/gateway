@@ -37,6 +37,13 @@ services:
       - ../microservicio-autenticacion/.env
     networks:
       - sociounido_net
+  ms-analiticas:
+    build: ../microservicio-analiticas
+    container_name: sociounido_ms_analiticas_integ
+    env_file:
+      - ../microservicio-analiticas/.env
+    networks:
+      - sociounido_net
 
 networks:
   sociounido_net:
