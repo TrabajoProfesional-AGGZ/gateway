@@ -1553,6 +1553,34 @@
         }
       ]
     },
+        {
+      "endpoint": "/api/v1/docs/analiticas",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/docs",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "GET",
+          "host": ["{{ env `MS_ANALITICAS_URL` }}"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/v1/openapi/analiticas.json",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/v1/openapi/analiticas.json",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "GET",
+          "host": ["{{ env `MS_ANALITICAS_URL` }}"]
+        }
+      ]
+    },
     {
       "endpoint": "/openapi.json",
       "method": "GET",
