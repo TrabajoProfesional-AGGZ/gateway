@@ -1896,7 +1896,7 @@
           "disable_jwk_security": true
         }
       },
-      "querystring_params": ["periodo"],
+      "input_query_strings": ["periodo"],
       "backend": [
         {
           "url_pattern": "/api/v1/metricas/finanzas",
@@ -1929,7 +1929,6 @@
           "disable_jwk_security": true
         }
       },
-      "querystring_params": ["periodo"],
       "backend": [
         {
           "url_pattern": "/api/v1/analiticas/fidelizacion",
