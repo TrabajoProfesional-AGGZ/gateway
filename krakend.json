@@ -8,7 +8,9 @@
     "security/cors": {
       "allow_origins": [
         "{{ env `FRONTEND_URL` }}",
-        "{{ env `APP_FRONTEND_URL` }}"
+        "{{ env `APP_FRONTEND_URL` }}",
+        "http://localhost:3000",
+        "http://localhost:5137"
       ],
       "allow_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
       "allow_headers": ["Origin", "Authorization", "Content-Type"],
