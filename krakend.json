@@ -1277,6 +1277,7 @@
       "endpoint": "/api/v1/reservas/turnos-disponibles/{id_instalacion}",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_query_strings": ["fecha"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
