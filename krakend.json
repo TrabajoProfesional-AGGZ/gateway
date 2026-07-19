@@ -83,6 +83,48 @@
         }
       ]
     },
+
+    {
+      "endpoint": "/api/v1/notificaciones/token",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+          "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+          "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+          "propagate_claims": [
+              ["email", "x-socio-email"],
+              ["sub", "x-firebase-uid"]
+          ]
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/api/v1/notificaciones/token",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "POST",
+          "host": ["{{ env `MS_CLUB_URL` }}"],
+          "headers_to_pass": [
+            "Authorization",
+            "Content-Type",
+            "x-socio-email",
+            "x-firebase-uid"
+          ],
+          "extra_config": {
+            "modifier/martian": {
+              "header.Modifier": {
+                "scope": ["request"],
+                "name": "X-Internal-Secret",
+                "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+              }
+            }
+          }
+        }
+      ]
+    },
     {
       "endpoint": "/api/v1/socios/por-nro-socio/{nro_socio}",
       "method": "GET",
