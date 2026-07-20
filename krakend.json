@@ -93,11 +93,7 @@
           "alg": "RS256",
           "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
           "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
-          "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-          "propagate_claims": [
-              ["email", "x-socio-email"],
-              ["sub", "x-firebase-uid"]
-          ]
+          "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"]
         }
       },
       "backend": [
@@ -107,12 +103,6 @@
           "sd": "static",
           "method": "POST",
           "host": ["{{ env `MS_CLUB_URL` }}"],
-          "headers_to_pass": [
-            "Authorization",
-            "Content-Type",
-            "x-socio-email",
-            "x-firebase-uid"
-          ],
           "extra_config": {
             "modifier/martian": {
               "header.Modifier": {
