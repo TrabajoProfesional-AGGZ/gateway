@@ -2351,6 +2351,7 @@
     {
       "endpoint": "/api/v1/alertas",
       "method": "GET",
+      "timeout":"15000ms",
       "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
