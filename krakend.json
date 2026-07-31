@@ -11,6 +11,10 @@
         "{{ env `APP_FRONTEND_URL` }}",
         "{{ env `APP_FRONTEND2_URL` }}",
         "{{ env `APP_FRONTEND3_URL` }}",
+        "{{ env `APP_FRONTEND4_URL` }}",
+        "{{ env `APP_FRONTEND5_URL` }}",
+        "{{ env `APP_FRONTEND6_URL` }}",
+        "{{ env `APP_FRONTEND7_URL` }}",
         "http://localhost:3000",
         "http://localhost:5137",
         "http://localhost:5138"

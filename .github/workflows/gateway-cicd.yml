@@ -33,6 +33,10 @@ jobs:
             export APP_FRONTEND_URL="https://frontfalso.com"
             export APP_FRONTEND2_URL="https://frontfalso.com"
             export APP_FRONTEND3_URL="https://frontfalso.com"
+            export APP_FRONTEND4_URL="https://frontfalso.com"
+            export APP_FRONTEND5_URL="https://frontfalso.com"
+            export APP_FRONTEND6_URL="https://frontfalso.com"
+            export APP_FRONTEND7_URL="https://frontfalso.com"
             export MS_AUTH_URL=http://localhost:9000
             export MS_ANALITICAS_URL=http://localhost:9090
             export MS_PAGOS_URL=http://localhost:9080
