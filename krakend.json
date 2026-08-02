@@ -3509,7 +3509,7 @@
       }]
     },
     {
-      "endpoint": "/api/v1/acceesos/enrolar",
+      "endpoint": "/api/v1/accesos/enrolar",
       "method": "POST",
       "output_encoding": "no-op",
       "extra_config": {
@@ -3522,7 +3522,7 @@
         }
       },
       "backend": [{
-        "url_pattern": "/api/v1/productos/enrolar",
+        "url_pattern": "/api/v1/accesos/enrolar",
         "encoding": "no-op",
         "method": "POST",
         "host": ["{{ env `MS_ACCESO_URL` }}"],
@@ -3534,7 +3534,7 @@
       }]
     },
     {
-      "endpoint": "/api/v1/acceesos/validar",
+      "endpoint": "/api/v1/accesos/validar",
       "method": "POST",
       "output_encoding": "no-op",
       "extra_config": {
@@ -3547,7 +3547,7 @@
         }
       },
       "backend": [{
-        "url_pattern": "/api/v1/productos/validar",
+        "url_pattern": "/api/v1/accesos/validar",
         "encoding": "no-op",
         "method": "POST",
         "host": ["{{ env `MS_ACCESO_URL` }}"],
