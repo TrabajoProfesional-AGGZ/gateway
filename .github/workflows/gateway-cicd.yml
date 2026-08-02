@@ -40,6 +40,7 @@ jobs:
             export MS_AUTH_URL=http://localhost:9000
             export MS_ANALITICAS_URL=http://localhost:9090
             export MS_PAGOS_URL=http://localhost:9080
+            export MS_ACCESO_URL=http://localhost:9050
             export INTERNAL_SECRET_TOKEN="supersecreto"
             krakend check --lint -t -d -c /etc/krakend/krakend.json
 
