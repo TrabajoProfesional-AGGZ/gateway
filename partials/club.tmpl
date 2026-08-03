@@ -1,0 +1,2862 @@
+{{ define "club.tmpl" }}
+{
+    "endpoint": "/api/v1/health",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },      
+    "backend": [
+    {
+        "url_pattern": "/api/v1/health",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+
+{
+    "endpoint": "/api/v1/socios",
+    "method": "GET",
+    "input_query_strings": ["pagina", "limite"],
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/notificaciones/token",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"]
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/notificaciones/token",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/por-nro-socio/{nro_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/por-nro-socio/{nro_socio}",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/por-disciplina/{id_disciplina}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/por-disciplina/{id_disciplina}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/por-dni/{dni}",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/por-dni/{dni}",
+        "method": "PATCH",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/por-dni/{dni}/reclamar",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/por-dni/{dni}/reclamar",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/por-email/{email}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/por-email/{email}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/{nro_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/{nro_socio}",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/{id}/foto",
+    "method": "POST",
+    "timeout": "15000ms",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/{id}/foto",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/finanzas/{id_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/finanzas/{id_socio}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/internos/cuotas/{id_cuota}/marcar-pagada",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/internos/cuotas/{id_cuota}/marcar-pagada",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/internos/reservas/{id_reserva}/marcar-pagada",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/internos/reservas/{id_reserva}/marcar-pagada",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/internos/entradas/{id_entrada}/marcar-pagada",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/internos/entradas/{id_entrada}/marcar-pagada",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/{nro_socio}",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/{nro_socio}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "PATCH",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/{nro_socio}",
+    "method": "DELETE",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/{nro_socio}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "DELETE",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/estados-socio",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/estados-socio",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/categorias-socio",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/categorias-socio",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/permisos",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/permisos",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/roles",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/roles",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/roles",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/roles",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/roles/{id_rol}",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/roles/{id_rol}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "PATCH",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/roles/{id_rol}",
+    "method": "DELETE",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/roles/{id_rol}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "DELETE",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+
+
+{
+    "endpoint": "/api/v1/usuarios",
+    "method": "GET",
+    "input_query_strings": ["pagina", "limite"],
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/usuarios",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/usuarios",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/usuarios",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/usuarios/{id_usuario}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/usuarios/{id_usuario}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/usuarios/{id_usuario}",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/usuarios/{id_usuario}",
+        "method": "PATCH",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/usuarios/{id_usuario}",
+    "method": "DELETE",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/usuarios/{id_usuario}",
+        "method": "DELETE",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/sedes",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/sedes",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/disciplinas",
+    "method": "GET",
+    "input_query_strings": ["solo_activas"],
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/disciplinas",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/disciplinas/por-socio/{id_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/disciplinas/por-socio/{id_socio}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/disciplinas/{id_disciplina}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/disciplinas/{id_disciplina}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/disciplinas",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/disciplinas",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/disciplinas/{id_disciplina}",
+    "method": "DELETE",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/disciplinas/{id_disciplina}",
+        "method": "DELETE",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/disciplinas/{id_disciplina}/socios/{id_socio}",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/disciplinas/{id_disciplina}/socios/{id_socio}",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/disciplinas/{id_disciplina}/socios/{id_socio}/lista-espera",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/disciplinas/{id_disciplina}/socios/{id_socio}/lista-espera",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/disciplinas/{id_disciplina}/socios/{id_socio}/lista-espera",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/disciplinas/{id_disciplina}/socios/{id_socio}/lista-espera",
+        "method": "PATCH",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/disciplinas/{id_disciplina}/socios/{id_socio}/extender",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/disciplinas/{id_disciplina}/socios/{id_socio}/extender",
+        "method": "PATCH",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/instalaciones",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/instalaciones",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/instalaciones",
+    "method": "POST",
+    "timeout":"3000ms",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/instalaciones",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/instalaciones/{id_instalacion}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/instalaciones/{id_instalacion}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/instalaciones/{id_instalacion}",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/instalaciones/{id_instalacion}",
+        "method": "PATCH",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/instalaciones/{id_instalacion}",
+    "method": "DELETE",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/instalaciones/{id_instalacion}",
+        "method": "DELETE",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas/{id_reserva}",
+    "method": "DELETE",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas/{id_reserva}",
+        "method": "DELETE",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas/por-socio/{nro_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas/por-socio/{nro_socio}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas/por-instalacion/{id_instalacion}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas/por-instalacion/{id_instalacion}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas/turnos-disponibles/{id_instalacion}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "input_query_strings": ["fecha"],
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas/turnos-disponibles/{id_instalacion}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas/historicas",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas/historicas",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas/historicas/por-instalacion/{id_instalacion}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas/historicas/por-instalacion/{id_instalacion}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas/historicas/por-socio/{nro_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas/historicas/por-socio/{nro_socio}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas/{id_reserva}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas/{id_reserva}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/reservas",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/reservas",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/eventos",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/eventos",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/eventos",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/eventos",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/eventos/imagen",
+    "method": "POST",
+    "timeout": "15000ms",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/eventos/imagen",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/eventos/{id_evento}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/eventos/{id_evento}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/entradas",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/entradas",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/entradas/por-socio/{id_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/entradas/por-socio/{id_socio}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/entradas/historicas/por-socio/{id_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/entradas/historicas/por-socio/{id_socio}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/entradas/pendientes/por-socio/{id_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/entradas/pendientes/por-socio/{id_socio}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/docs/club",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/docs",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"]
+    }
+    ]
+},
+{
+    "endpoint": "/openapi.json",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/openapi.json",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"]
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/noticias",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/noticias",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/noticias/vigentes",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/noticias/vigentes",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/noticias/{id}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/noticias/{id}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/noticias",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/noticias",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/noticias/imagen",
+    "method": "POST",
+    "timeout": "15000ms",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/noticias/imagen",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/noticias/{id}",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/noticias/{id}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "PATCH",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/noticias/{id}",
+    "method": "DELETE",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/noticias/{id}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "DELETE",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/alertas",
+    "method": "GET",
+    "timeout":"15000ms",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/alertas",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "@comment": "=== ALERTAS: Listar por socio ===",
+    "endpoint": "/api/v1/alertas/por-socio/{id_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/alertas/por-socio/{id_socio}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/alertas",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/alertas",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/alertas/{id}",
+    "method": "DELETE",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/alertas/{id}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "DELETE",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/socios/validar",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/api/v1/socios/validar",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},    
+{
+    "@comment": "=== TRAMITES: Listar tipos ===",
+    "endpoint": "/api/v1/tramites/tipos",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/tramites/tipos",
+    "encoding": "no-op",
+    "method": "GET",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "@comment": "=== TRAMITES: Listar por socio ===",
+    "endpoint": "/api/v1/tramites/por-socio/{id_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/tramites/por-socio/{id_socio}",
+    "encoding": "no-op",
+    "method": "GET",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "@comment": "=== TRAMITES: Pendientes de un socio ===",
+    "endpoint": "/api/v1/tramites/pendientes/{id_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/tramites/pendientes/{id_socio}",
+    "encoding": "no-op",
+    "method": "GET",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "@comment": "=== TRAMITES: Crear (socio sube archivo) ===",
+    "endpoint": "/api/v1/tramites/{id_socio}",
+    "method": "POST",
+    "timeout": "30000ms",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/tramites/{id_socio}",
+    "encoding": "no-op",
+    "method": "POST",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "@comment": "=== TRAMITES: Obtener por ID ===",
+    "endpoint": "/api/v1/tramites/{tramite_id}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/tramites/{tramite_id}",
+    "encoding": "no-op",
+    "method": "GET",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "@comment": "=== TRAMITES: Revisar (admin aprueba/rechaza) ===",
+    "endpoint": "/api/v1/tramites/{tramite_id}/revisar",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/tramites/{tramite_id}/revisar",
+    "encoding": "no-op",
+    "method": "PATCH",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "endpoint": "/api/v1/productos/disponibles",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/productos/disponibles",
+    "encoding": "no-op",
+    "method": "GET",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "endpoint": "/api/v1/productos/{producto_id}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/productos/{producto_id}",
+    "encoding": "no-op",
+    "method": "GET",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+
+{
+    "endpoint": "/api/v1/empleados",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/empleados",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/empleados/validar",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/api/v1/empleados/validar",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "POST",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/empleados/mail-por-legajo/{legajo}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/api/v1/empleados/mail-por-legajo/{legajo}",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/empleados/por-legajo/{legajo}/reclamar",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/empleados/por-legajo/{legajo}/reclamar",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/empleados/por-legajo/{legajo}",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/empleados/por-legajo/{legajo}",
+        "method": "PATCH",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/empleados/por-legajo/{legajo}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/empleados/por-legajo/{legajo}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/empleados/por-email/{mail}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/empleados/por-email/{mail}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/productos/imagen",
+    "method": "POST",
+    "timeout": "30000ms",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/productos/imagen",
+    "encoding": "no-op",
+    "method": "POST",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "endpoint": "/api/v1/productos",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/productos",
+    "encoding": "no-op",
+    "method": "GET",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "endpoint": "/api/v1/productos",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/productos",
+    "encoding": "no-op",
+    "method": "POST",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+},
+{
+    "endpoint": "/api/v1/productos/{producto_id}",
+    "method": "PATCH",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [{
+    "url_pattern": "/api/v1/productos/{producto_id}",
+    "encoding": "no-op",
+    "method": "PATCH",
+    "host": ["{{ env `MS_CLUB_URL` }}"],
+    "extra_config": {
+        "modifier/martian": {
+        "header.Modifier": { "scope": ["request"], "name": "X-Internal-Secret", "value": "{{ env `INTERNAL_SECRET_TOKEN` }}" }
+        }
+    }
+    }]
+}
+{{ end }}

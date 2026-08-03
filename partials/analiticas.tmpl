@@ -1,0 +1,152 @@
+{{ define "analiticas.tmpl" }}
+{
+    "endpoint": "/api/v1/docs/analiticas",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/docs",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_ANALITICAS_URL` }}"]
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/openapi/analiticas.json",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/api/v1/openapi/analiticas.json",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_ANALITICAS_URL` }}"]
+    }
+    ]
+},
+{
+    "@comment": "=== METRICAS: Top disciplinas ===",
+    "endpoint": "/api/v1/metricas/disciplinas/top",
+    "method": "GET",
+    "input_query_strings": ["limite"],
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/metricas/disciplinas/top",
+        "encoding": "no-op",
+        "method": "GET",
+        "host": ["{{ env `MS_ANALITICAS_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "@comment": "=== METRICAS: Ocupación instalaciones ===",
+    "endpoint": "/api/v1/metricas/instalaciones/ocupacion",
+    "method": "GET",
+    "input_query_strings": ["dias", "horas_diarias"],
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/metricas/instalaciones/ocupacion",
+        "encoding": "no-op",
+        "method": "GET",
+        "host": ["{{ env `MS_ANALITICAS_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "@comment": "=== METRICAS: Health ===",
+    "endpoint": "/api/v1/metricas/health",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/api/v1/metricas/health",
+        "encoding": "no-op",
+        "method": "GET",
+        "host": ["{{ env `MS_ANALITICAS_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/metricas/finanzas",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "input_query_strings": ["periodo"],
+    "backend": [
+    {
+        "url_pattern": "/api/v1/metricas/finanzas",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_ANALITICAS_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+}
+{{ end }}

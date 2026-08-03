@@ -1,7 +1,9 @@
-FROM krakend:latest
+FROM krakend:2.13.8
 
-# Copiamos tu archivo de configuración al contenedor
-COPY krakend.json /etc/krakend/krakend.json
+ENV FC_ENABLE=1
+ENV FC_TEMPLATES=/etc/krakend/partials
 
-# Ejecutamos KrakenD
-CMD ["run", "-d", "-c", "/etc/krakend/krakend.json"]
+COPY krakend.tmpl /etc/krakend/krakend.tmpl
+COPY partials/ /etc/krakend/partials/
+
+CMD ["run", "-d", "-c", "/etc/krakend/krakend.tmpl"]
