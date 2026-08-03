@@ -48,5 +48,19 @@
             }
         }
     }]
+},
+{
+    "endpoint": "/api/v1/docs/acceso",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/docs",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_ACCESO_URL` }}"]
+    }
+    ]
 }
 {{ end }}
