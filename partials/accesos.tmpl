@@ -1,5 +1,33 @@
 {{ define "accesos.tmpl" }}
 {
+    "endpoint": "/api/v1/docs/acceso",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/docs",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_ACCESO_URL` }}"]
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/openapi/acceso.json",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/api/v1/openapi/acceso.json",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_ACCESO_URL` }}"]
+    }
+    ]
+},
+{
     "endpoint": "/api/v1/accesos/enrolar",
     "method": "POST",
     "output_encoding": "no-op",
@@ -48,19 +76,5 @@
             }
         }
     }]
-},
-{
-    "endpoint": "/api/v1/docs/acceso",
-    "method": "GET",
-    "output_encoding": "no-op",
-    "backend": [
-    {
-        "url_pattern": "/docs",
-        "encoding": "no-op",
-        "sd": "static",
-        "method": "GET",
-        "host": ["{{ env `MS_ACCESO_URL` }}"]
-    }
-    ]
 }
 {{ end }}

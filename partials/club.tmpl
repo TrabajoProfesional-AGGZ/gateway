@@ -1,5 +1,33 @@
 {{ define "club.tmpl" }}
 {
+    "endpoint": "/api/v1/docs/club",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/docs",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"]
+    }
+    ]
+},
+{
+    "endpoint": "/openapi.json",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "backend": [
+    {
+        "url_pattern": "/openapi.json",
+        "encoding": "no-op",
+        "sd": "static",
+        "method": "GET",
+        "host": ["{{ env `MS_CLUB_URL` }}"]
+    }
+    ]
+},
+{
     "endpoint": "/api/v1/health",
     "method": "GET",
     "output_encoding": "no-op",
@@ -41,7 +69,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_socios"]
     }
     },
     "backend": [
@@ -134,7 +164,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_socios"]
     }
     },
     "backend": [
@@ -445,7 +477,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["crear_socio"]
     }
     },
     "backend": [
@@ -541,7 +575,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_socios"]
     }
     },
     "backend": [
@@ -573,7 +609,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_socios"]
     }
     },
     "backend": [
@@ -755,8 +793,6 @@
     }
     ]
 },
-
-
 {
     "endpoint": "/api/v1/usuarios",
     "method": "GET",
@@ -768,7 +804,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_usuarios"]
     }
     },
     "backend": [
@@ -799,7 +837,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["crear_usuario"]
     }
     },
     "backend": [
@@ -861,7 +901,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["editar_usuario"]
     }
     },
     "backend": [
@@ -892,7 +934,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["borrar_usuario"]
     }
     },
     "backend": [
@@ -923,7 +967,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_disciplinas"]
     }
     },
     "backend": [
@@ -956,7 +1002,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_disciplinas"]
     }
     },
     "backend": [
@@ -987,7 +1035,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_disciplinas"]
     }
     },
     "backend": [
@@ -1018,7 +1068,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_disciplinas"]
     }
     },
     "backend": [
@@ -1049,7 +1101,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["crear_disciplina"]
     }
     },
     "backend": [
@@ -1080,7 +1134,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["borrar_disciplina"]
     }
     },
     "backend": [
@@ -1298,7 +1354,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_instalaciones"]
     }
     },
     "backend": [
@@ -1329,7 +1387,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_instalaciones"]
     }
     },
     "backend": [
@@ -1360,7 +1420,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["borrar_instalacion"]
     }
     },
     "backend": [
@@ -1453,7 +1515,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_reservas"]
     }
     },
     "backend": [
@@ -1516,7 +1580,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_reservas"]
     }
     },
     "backend": [
@@ -1547,7 +1613,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_reservas"]
     }
     },
     "backend": [
@@ -1609,7 +1677,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_reservas"]
     }
     },
     "backend": [
@@ -1733,7 +1803,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["crear_evento"]
     }
     },
     "backend": [
@@ -1765,7 +1837,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["crear_evento"]
     }
     },
     "backend": [
@@ -1797,7 +1871,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_eventos"]
     }
     },
     "backend": [
@@ -1943,34 +2019,6 @@
     ]
 },
 {
-    "endpoint": "/api/v1/docs/club",
-    "method": "GET",
-    "output_encoding": "no-op",
-    "backend": [
-    {
-        "url_pattern": "/docs",
-        "encoding": "no-op",
-        "sd": "static",
-        "method": "GET",
-        "host": ["{{ env `MS_CLUB_URL` }}"]
-    }
-    ]
-},
-{
-    "endpoint": "/openapi.json",
-    "method": "GET",
-    "output_encoding": "no-op",
-    "backend": [
-    {
-        "url_pattern": "/openapi.json",
-        "encoding": "no-op",
-        "sd": "static",
-        "method": "GET",
-        "host": ["{{ env `MS_CLUB_URL` }}"]
-    }
-    ]
-},
-{
     "endpoint": "/api/v1/noticias",
     "method": "GET",
     "output_encoding": "no-op",
@@ -1980,7 +2028,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_noticias"]
     }
     },
     "backend": [
@@ -2076,7 +2126,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["crear_noticia"]
     }
     },
     "backend": [
@@ -2109,7 +2161,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["crear_noticia"]
     }
     },
     "backend": [
@@ -2141,7 +2195,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["editar_noticia"]
     }
     },
     "backend": [
@@ -2173,7 +2229,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["borrar_noticia"]
     }
     },
     "backend": [
@@ -2206,7 +2264,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_alertas"]
     }
     },
     "backend": [
@@ -2271,7 +2331,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["crear_alerta"]
     }
     },
     "backend": [
@@ -2303,7 +2365,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["borrar_alerta"]
     }
     },
     "backend": [
@@ -2490,7 +2554,9 @@
         "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
         "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
         "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
-        "disable_jwk_security": true
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_tramites"]
     }
     },
     "backend": [{
