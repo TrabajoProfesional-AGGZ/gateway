@@ -3,12 +3,13 @@ version: '3.8'
 
 services:
   krakend:
-    image: krakend:latest
+    build: .
     container_name: sociounido_gateway
     env_file:
       - .env
     environment:
       - FC_ENABLE=1
+      - FC_TEMPLATES=/etc/krakend/partials
       - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
       - MS_CLUB_URL=${MS_CLUB_URL}
       - MS_AUTH_URL=${MS_AUTH_URL}
@@ -19,8 +20,7 @@ services:
       - API_PORT=${API_PORT}
       - FRONTEND_URL=${FRONTEND_URL}
       - APP_FRONTEND_URL=${APP_FRONTEND_URL}
-    volumes:
-      - ./krakend.json:/etc/krakend/krakend.json
+    command: ["run", "-c", "/etc/krakend/krakend.tmpl"]
     ports:
       - "${API_PORT}:8080"
     networks:
