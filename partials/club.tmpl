@@ -474,6 +474,39 @@
     ]
 },
 {
+    "endpoint": "/api/v1/internos/compras/{id_compra}/marcar-pagada",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true,
+        "roles_key": "permisos",
+        "roles": ["ver_pagos_pendientes", "crear_compra"]
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/internos/compras/{id_compra}/marcar-pagada",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
     "endpoint": "/api/v1/socios",
     "method": "POST",
     "output_encoding": "no-op",
@@ -2009,6 +2042,68 @@
     "backend": [
     {
         "url_pattern": "/api/v1/entradas/pendientes/por-socio/{id_socio}",
+        "method": "GET",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/compras",
+    "method": "POST",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/compras",
+        "method": "POST",
+        "encoding": "no-op",
+        "host": ["{{ env `MS_CLUB_URL` }}"],
+        "extra_config": {
+        "modifier/martian": {
+            "header.Modifier": {
+            "scope": ["request"],
+            "name": "X-Internal-Secret",
+            "value": "{{ env `INTERNAL_SECRET_TOKEN` }}"
+            }
+        }
+        }
+    }
+    ]
+},
+{
+    "endpoint": "/api/v1/compras/socio/{id_socio}",
+    "method": "GET",
+    "output_encoding": "no-op",
+    "extra_config": {
+    "auth/validator": {
+        "alg": "RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "issuer": "https://securetoken.google.com/{{ env `FIREBASE_PROJECT_ID` }}",
+        "audience": ["{{ env `FIREBASE_PROJECT_ID` }}"],
+        "disable_jwk_security": true
+    }
+    },
+    "backend": [
+    {
+        "url_pattern": "/api/v1/compras/socio/{id_socio}",
         "method": "GET",
         "encoding": "no-op",
         "host": ["{{ env `MS_CLUB_URL` }}"],
